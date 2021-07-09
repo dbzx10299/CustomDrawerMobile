@@ -6,36 +6,21 @@ function CustomDrawerMobile() {
     }
     let template = '';
   
-    // pw--slide-right must be passed in due to css selector
     function render(drawerType, contentModifier) {
-        if (drawerType) {
-		return `
-		    <div class="pw-sheet ${drawerType}">
-			<div class="pw-sheet__mask"></div>
-			<div class="pw-sheet__wrapper ${contentModifier}">
-			    <div class="pw-sheet__inner">
-				<div class="pw-sheet__content">
+	return `
+	    <div class="pw-sheet ${drawerType ? "pw--slide-right" : "pw--slide-bottom"}">
+		<div class="pw-sheet__mask"></div>
+		<div class="pw-sheet__wrapper ${contentModifier}">
+		    <div class="pw-sheet__inner">
+			<div class="pw-sheet__content">
 
-				</div>
-			    </div>
 			</div>
-		    </div>`; 
-	      }     
-	      return `
-		  <div class="pw-sheet pw--slide-bottom">
-		      <div class="pw-sheet__mask"></div>
-		      <div class="pw-sheet__wrapper ${contentModifier}">
-	                  <div class="pw-sheet__inner">
-		              <div class="pw-sheet__content">
-
-			      </div>
-			  </div>
-		      </div>
-		  </div>`;
+		    </div>
+		</div>
+	    </div>`; 
     }
   
   
-    // pw--slide-right should be only option to use
     function open(drawerType, contentModifier) {
         template = render(drawerType, contentModifier);
         $('#main').append(template);
@@ -89,7 +74,7 @@ const customDrawerMobile = CustomDrawerMobile();
 // 2.) .pw--slide-right .pw-sheet__wrapper
 
 // .open() to slide up
-// .open('pw--slide-right') to slide right
+// .open('string') to slide right
 
 // close button is always in the content which gets injected
 // add the class 'pw--close-immediate' to 'pw-button pw-close-button'
