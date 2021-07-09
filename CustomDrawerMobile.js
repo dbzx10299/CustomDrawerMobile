@@ -24,14 +24,14 @@ function CustomDrawerMobile() {
 	      return `
 		  <div class="pw-sheet pw--slide-bottom">
 		      <div class="pw-sheet__mask"></div>
-			  <div class="pw-sheet__wrapper ${contentModifier}">
-			      <div class="pw-sheet__inner">
-				  <div class="pw-sheet__content">
+		      <div class="pw-sheet__wrapper ${contentModifier}">
+	                  <div class="pw-sheet__inner">
+		              <div class="pw-sheet__content">
 
-				  </div>
 			      </div>
 			  </div>
-		      </div>`;
+		      </div>
+		  </div>`;
     }
   
   
