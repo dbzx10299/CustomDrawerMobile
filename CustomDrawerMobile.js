@@ -30,12 +30,12 @@ function CustomDrawerMobile() {
                 $('.pw-sheet__mask').css("opacity", "0.5");
                 $('.pw-sheet__wrapper').css("transform", "translateX(0%)");
             }); 
-        } else {
-              setTimeout(function() {
-                  $('.pw-sheet__mask').css("opacity", "0.5");
-                  $('.pw-sheet__wrapper').css("transform", "translateY(0%)");
-              });
         }
+	    
+        setTimeout(function() {
+	    $('.pw-sheet__mask').css("opacity", "0.5");
+	    $('.pw-sheet__wrapper').css("transform", "translateY(0%)");
+        });
     }
   
   
