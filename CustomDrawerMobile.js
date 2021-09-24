@@ -2,50 +2,68 @@ function CustomDrawerMobile() {
     const selector = {
       drawer: '.pw-sheet',
       content: '.pw-sheet .pw-sheet__content',
+      overlay: '.pw-sheet__wrapper',
       close: '.pw-sheet .pw-close-button'
     }
+    
     let template = '';
   
-    function render(drawerType, contentModifier) {
-	return `
-	    <div class="pw-sheet ${drawerType ? "pw--slide-right" : "pw--slide-bottom"}">
-		<div class="pw-sheet__mask"></div>
-		<div class="pw-sheet__wrapper ${contentModifier}">
-		    <div class="pw-sheet__inner">
-			<div class="pw-sheet__content">
+    function render(config) {
+      if (!config) {
+        config = {};
+      }
+            
+      const { drawerTransition='pw--slide-right', drawerType='', shrinkToContent='' } = config;
+      
+      return `
+         <div class="pw-sheet ${drawerTransition} ${drawerType}">
+	    <div class="pw-sheet__mask"></div>
+	       <div class="pw-sheet__wrapper">
+	          <div class="pw-sheet__inner ${shrinkToContent}">
+	             <div class="pw-sheet__content">
 
-			</div>
-		    </div>
-		</div>
+		     </div>
+		  </div>
+	       </div>
 	    </div>`; 
     }
   
-  
-    function open(drawerType, contentModifier) {
-        template = render(drawerType, contentModifier);
+	
+    function open(config) {
+        if (!config) {
+          config = {};
+        }
+      
+        const { drawerType, onRender } = config;
+      
+        template = render(config);
         $('#main').append(template);
+      
+      	if (onRender) {
+          onRender()
+        }
       
         if (drawerType) {
             setTimeout(function() {
-                $('.pw-sheet__mask').css("opacity", "0.5");
-                $('.pw-sheet__wrapper').css("transform", "translateX(0%)");
+              $('.pw-sheet__mask').css("opacity", "0.5");
+              $('.pw-sheet__wrapper').css("transform", "translateX(0%)");
             }); 
         }
-	    
+          
         setTimeout(function() {
-	    $('.pw-sheet__mask').css("opacity", "0.5");
-	    $('.pw-sheet__wrapper').css("transform", "translateY(0%)");
+          $('.pw-sheet__mask').css("opacity", "0.5");
+          $('.pw-sheet__wrapper').css("transform", "translateY(0%)");
         });
     }
-  
+	
   
     function close() {
         $('.pw-sheet__mask').css("opacity", "0");
         $('.pw-sheet__wrapper').css("transform", "");
       
         setTimeout(() => {
-	    $(selector.drawer).remove();
-	}, 400);
+	    	$(selector.drawer).remove();
+		}, 400);
     }
 
     function closeImmediate() {
@@ -53,10 +71,14 @@ function CustomDrawerMobile() {
     }
 
 
+    $(document).on('click', selector.overlay, function(e) {
+      close();
+    });
+
     $(document).on('click', selector.close, function() {
         if ($(selector.close).hasClass('pw--close-immediate')) {
-            closeImmediate();
-        } 
+           closeImmediate();
+        }
         close();
     })
   	
@@ -68,6 +90,7 @@ function CustomDrawerMobile() {
 }
 
 const customDrawerMobile = CustomDrawerMobile();
+
 
 // There are two css selectors set up 
 // 1.) .pw--slide-bottom .pw-sheet__wrapper 
