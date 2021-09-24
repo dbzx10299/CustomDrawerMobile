@@ -62,8 +62,8 @@ function CustomDrawerMobile() {
         $('.pw-sheet__wrapper').css("transform", "");
       
         setTimeout(() => {
-	    	$(selector.drawer).remove();
-		}, 400);
+	   $(selector.drawer).remove();
+	}, 400);
     }
 
     function closeImmediate() {
